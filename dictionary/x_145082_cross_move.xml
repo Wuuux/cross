@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Move" max_length="40" name="x_145082_cross_move" type="collection">
+        <element label="Game" max_length="32" name="game" reference="x_145082_cross_game" type="reference"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element choice="3" default="1" label="Player" max_length="40" name="player" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="O" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="X" sequence="2" value="2"/>
+            </choice>
+        </element>
+        <element default="0" label="Step" max_length="40" name="step" type="integer"/>
+        <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
+        <element label="X" max_length="40" name="x" type="integer"/>
+        <element label="Y" max_length="40" name="y" type="integer"/>
+        <index name="index">
+            <element name="game"/>
+        </index>
+        <index name="index2">
+            <element name="sys_class_name"/>
+        </index>
+    </element>
+</database>

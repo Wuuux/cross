@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="winner" table="x_145082_cross_game" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>winner</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Open</label>
+            <language>en</language>
+            <name>x_145082_cross_game</name>
+            <sequence/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-02-15 23:12:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1cb328db4fe3634073f16b628110c701</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-02-15 23:12:18</sys_updated_on>
+            <value>0</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>winner</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Circle</label>
+            <language>en</language>
+            <name>x_145082_cross_game</name>
+            <sequence/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-02-15 23:12:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d9c3a09b4fe3634073f16b628110c7c5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-02-15 23:12:38</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>winner</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cross</label>
+            <language>en</language>
+            <name>x_145082_cross_game</name>
+            <sequence/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-02-15 23:12:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>edd3a49b4fe3634073f16b628110c7ea</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-02-15 23:12:53</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>winner</element>
+            <name>x_145082_cross_game</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-02-15 23:12:18</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>83b3a49b4fe3634073f16b628110c7e8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>winner</sys_name>
+            <sys_package display_value="Cross game" source="x_145082_cross">feaf8d074fa7234073f16b628110c7b6</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Cross game">feaf8d074fa7234073f16b628110c7b6</sys_scope>
+            <sys_update_name>sys_choice_x_145082_cross_game_winner</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-02-15 23:12:18</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

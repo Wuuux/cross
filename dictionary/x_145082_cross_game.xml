@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Cross game Table" max_length="40" name="x_145082_cross_game" type="collection">
+    <element label="Cross game" max_length="40" name="x_145082_cross_game" type="collection">
+        <element label="Current player" max_length="40" name="current_player" type="integer"/>
+        <element label="Game" max_length="2000" name="game" type="string"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Player" max_length="32" name="player" reference="sys_user" type="reference"/>
+        <element default="0" label="Step" max_length="40" name="step" type="integer"/>
+        <element choice="3" default="0" label="Winner" max_length="40" name="winner" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Circle" value="1"/>
+                <element inactive_on_update="false" label="Cross" value="2"/>
+                <element inactive_on_update="false" label="Open" value="0"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="player"/>
+        </index>
     </element>
 </database>

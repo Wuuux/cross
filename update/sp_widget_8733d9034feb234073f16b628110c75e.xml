@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+	
+  var c = this;
+	console.log(c.data);
+	c.board_x = -12;
+	c.board_y = 12;
+	c.board = [];
+	for(var y = 10; y >= -10; y--){
+		for(var x=-10; x<=10; x++){
+			var obj = {};
+			obj.x = x;
+			obj.y = y;
+			c.board.push(obj);
+		}
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.field {
+		   width : 25px;
+		   height : 25px;
+		   background-image: url('white.png');
+		   float : left;
+		}
+h1 {
+	text-align : center;
+}
+		.field.open:hover {
+			background-color: grey;
+		}
+		.field.circle {
+			background-image: url('circle.png');
+		}
+		.field.cross {
+			background-image: url('cross.png');
+		}
+		.neighbour {
+			background-color:lightgreen;
+		}
+		#board {
+		   width : 525px;
+		   height : 525px;
+		   
+		   margin : auto;
+		float:left;
+		margin-left : 250px;
+		}
+		#monitor {
+
+		float:left;
+		padding : 10px;
+		
+		}
+		
+		#save {
+		width : 50px;
+			background-color:red;
+		color : white;
+			margin : auto;
+		padding : 10px;
+		cursor: pointer
+		}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>board</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>board</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+ var g = new GlideRecord('x_145082_cross_game');
+	g.get('3a8e1cd74fe3634073f16b628110c79d');
+	
+	data.game = {}; 
+	data.game.number = g.number.toString();
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-02-15 08:01:20</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>8733d9034feb234073f16b628110c75e</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>board</sys_name>
+        <sys_package display_value="Cross game" source="x_145082_cross">feaf8d074fa7234073f16b628110c7b6</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Cross game">feaf8d074fa7234073f16b628110c7b6</sys_scope>
+        <sys_update_name>sp_widget_8733d9034feb234073f16b628110c75e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-02-15 22:56:41</sys_updated_on>
+        <template><![CDATA[<div id = "board">
+<!-- your widget template -->
+  <h1>{{c.data.game.number}}</h1>
+  
+  <div class = "field open" data-x="{{field.x}}" data-y="{{field.y}}" ng-repeat="field in c.board">
+    
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>
