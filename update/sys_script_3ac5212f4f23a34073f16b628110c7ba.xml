@@ -35,8 +35,8 @@
 // 	game.get(current.game.toString());
 	
 	current.step = current.game.step + 1;
-	if (current.game.current_player == 1) current.player = "2";
-	else current.player = "1";
+	if (current.game.current_player == 1) current.player = "1";
+	else current.player = "2";
 	
 
 })(current, previous);]]></script>
@@ -47,7 +47,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>3ac5212f4f23a34073f16b628110c7ba</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>Set player and step</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cross game" source="x_145082_cross">feaf8d074fa7234073f16b628110c7b6</sys_package>
@@ -56,7 +56,7 @@
         <sys_scope display_value="Cross game">feaf8d074fa7234073f16b628110c7b6</sys_scope>
         <sys_update_name>sys_script_3ac5212f4f23a34073f16b628110c7ba</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-02-16 23:46:09</sys_updated_on>
+        <sys_updated_on>2019-02-19 14:45:47</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>
