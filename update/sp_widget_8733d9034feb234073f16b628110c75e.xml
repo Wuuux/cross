@@ -5,38 +5,83 @@
   /* widget controller */
 	
   var c = this;
-	c.player = 1;
+	c.player = c.data.current_player;
+	c.move_set = false;
+	c.move_locked = false;
+	c.move_x = 0;
+	c.move_y = 0;
+	
 	glideUserSession.loadCurrentUser().then(function(currentUser) {
 		c.player_name = currentUser.getFullName();
-	//console.log(currentUser.getFullName());
 	});
-	//console.log('START',c.data);
-	/*
-	c.board_x = -12;
-	c.board_y = 12;
-	c.board = [];
-	for(var y = 10; y >= -10; y--){
-		for(var x=-10; x<=10; x++){
-			var obj = {};
-			obj.x = x;
-			obj.y = y;
-			c.board.push(obj);
-		}
-	}
-	*/
+	
 	
 	c.clickOnField = function(field){
-		if (field.player != 0 || c.data.game.isOver) return;
+		//console.log(field);
+		//console.log(c.move_x,c.move_y,c.player);
+		if ( field.player != 0 || c.data.game.isOver || c.move_locked ) return;
 		
 		c.data.move = {};
 		c.data.move.x = field.x;
 		c.data.move.y = field.y;
 		c.data.move.player = c.player;
-		if (c.player == 1 ) c.player = 2; else c.player = 1;
 		
+		var size = c.data.game.board.length;
+		  for (var i=0;i<size;i++){
+				if (c.data.game.board[i].x == c.data.move.x && c.data.game.board[i].y == c.data.move.y){
+					
+					if ( !c.move_set ){
+						c.move_x = c.data.move.x;	
+						c.move_y = c.data.move.y;
+						c.move_set = true;
+						c.data.game.board[i].player = c.data.move.player;
+						if (c.player == 1) $("[data-x="+c.data.move.x+"][data-y="+c.data.move.y+"]").addClass('circle2 locked').removeClass('open');
+						if (c.player == 2) $("[data-x="+c.data.move.x+"][data-y="+c.data.move.y+"]").addClass('cross2 locked').removeClass('open');
+					
+					}
+					else if ( c.move_x == c.data.move.x && c.move_y == c.data.move.y){
+						c.move_x = 0;	
+						c.move_y = 0;
+						c.move_set = false;
+						c.data.game.board[i].player = 0;
+						if (c.player == 1) $("[data-x="+c.data.move.x+"][data-y="+c.data.move.y+"]").addClass('open').removeClass('circle2 locked');
+						if (c.player == 2) $("[data-x="+c.data.move.x+"][data-y="+c.data.move.y+"]").addClass('open').removeClass('cross2 locked');
+					
+					}
+					else {
+						
+						if (c.player == 1) $("[data-x="+c.move_x+"][data-y="+c.move_y+"]").addClass('open').removeClass('circle2 locked');
+						if (c.player == 2) $("[data-x="+c.move_x+"][data-y="+c.move_y+"]").addClass('open').removeClass('cross2 locked');
+						var size2 = c.data.game.board.length;
+						for (var j=0; j<size2; j++){
+							if (c.data.game.board[j].x == c.move_x && c.data.game.board[j].y == c.move_y){
+								c.data.game.board[j].player = 0;
+							}
+						}
+						c.move_x = c.data.move.x;	
+						c.move_y = c.data.move.y;
+						
+						if (c.player == 1) $("[data-x="+c.data.move.x+"][data-y="+c.data.move.y+"]").addClass('circle2 locked').removeClass('open');
+						if (c.player == 2) $("[data-x="+c.data.move.x+"][data-y="+c.data.move.y+"]").addClass('cross2 locked').removeClass('open');
+						c.data.game.board[i].player = c.data.move.player;
+						
+					}
+				}
+			}
+	}
+	
+	c.saveMove = function(){
+		console.log(c.move_x,c.move_y,c.player,c.move_set);
 		
+		c.data.move.x = c.move_x;
+		c.data.move.y = c.move_y;
+		c.data.move.player = c.player;
+		
+		if (c.player == 1) $("[data-x="+c.data.move.x+"][data-y="+c.data.move.y+"]").addClass('circle').removeClass('circle2');
+		if (c.player == 2) $("[data-x="+c.data.move.x+"][data-y="+c.data.move.y+"]").addClass('cross').removeClass('cross2');
+		c.move_locked = true;
+		c.move_set = false;
 		c.server.update();
-		
 	}
 }]]></client_script>
         <controller_as>c</controller_as>
@@ -54,38 +99,36 @@ h3 {
 }
 		.field.open:hover {
 			background-color: grey;
+      
 		}
 		.field.circle {
 			background-image: url('circle.png');
 		}
+		.field.circle2 {
+			background-image: url('circle2.jpg');
+		}
 		.field.cross {
 			background-image: url('cross.png');
+		}
+		.field.cross2 {
+			background-image: url('cross2.jpg');
 		}
 		.neighbour {
 			background-color:lightgreen;
 		}
 		#board {
-		   width : 525px;
-		   height : 525px;
+		   width : 375px;
+		   height : 375px;
 		   
 		   margin : auto;
 		float:left;
-		margin-left : 250px;
+		text-align: center;
 		}
-		#monitor {
-
-		float:left;
-		padding : 10px;
 		
-		}
 		
 		#save {
-		width : 50px;
-			background-color:red;
-		color : white;
-			margin : auto;
-		padding : 10px;
-		cursor: pointer
+		margin-top : 20px;
+	
 		}</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -106,17 +149,19 @@ h3 {
 	
 	
 		if (!input){
-	
+		//gs.addInfoMessage('NO INPUT');
 			var g = new GlideRecord('x_145082_cross_game');
-			g.get('5656d35c4f3f630073f16b628110c7fe');
+			g.get('29bffadd4fb7a30073f16b628110c7dd');
 			data.game_sys_id = g.sys_id.toString();
 			data.game = {}; 
 			data.game.board = [];
 			data.game.number = g.number.toString();
 	    data.game.isOver = g.winner != 0;
+			data.player_name = g.player.name.toString();
+			data.current_player = g.current_player.toString();
 
-			for(var y = 10; y >= -10; y--){
-				for(var x=-10; x<=10; x++){
+			for(var y = 7; y >= -7; y--){
+				for(var x=-7; x<=7; x++){
 					var obj = {};
 					obj.x = x;
 					obj.y = y;
@@ -133,35 +178,20 @@ h3 {
 		}
 	else
 	{
-		//data.test2 = input.test;
-		//data.move2 = input.move;
-		//gs.info('test','test');
-		//if (input.move.x > -100){
-			//gs.info('test2 :' + input.game_sys_id,'test');
+		//gs.addInfoMessage(input.move.x + ' ' + input.move.y + ' ' + input.move.player );
 			var m = new GlideRecord('x_145082_cross_move');
 			m.initialize();
 			m.game = input.game_sys_id;
 			m.x = input.move.x;
 			m.y = input.move.y;
 		  m.insert();
-			var size = data.game.board.length;
+			var size = input.game.board.length;
 		  for (var i=0;i<size;i++){
-				if (data.game.board[i].x == input.move.x && data.game.board[i].y == input.move.y){
-					data.game.board[i].player = input.move.player;
-				}
-					
+				if (input.game.board[i].x == input.move.x && input.game.board[i].y == input.move.y){
+					input.game.board[i].player = input.move.player;
 				}
 			}
-			
-		//}
-	}
-		
-	
-	
-	
-	
-	
-	
+		}
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
@@ -169,7 +199,7 @@ h3 {
         <sys_created_on>2019-02-15 08:01:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>8733d9034feb234073f16b628110c75e</sys_id>
-        <sys_mod_count>60</sys_mod_count>
+        <sys_mod_count>119</sys_mod_count>
         <sys_name>board</sys_name>
         <sys_package display_value="Cross game" source="x_145082_cross">feaf8d074fa7234073f16b628110c7b6</sys_package>
         <sys_policy/>
@@ -177,11 +207,11 @@ h3 {
         <sys_scope display_value="Cross game">feaf8d074fa7234073f16b628110c7b6</sys_scope>
         <sys_update_name>sp_widget_8733d9034feb234073f16b628110c75e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-02-21 15:00:41</sys_updated_on>
+        <sys_updated_on>2019-02-22 16:25:55</sys_updated_on>
         <template><![CDATA[<div id = "board">
 <!-- your widget template -->
   <h1>{{c.data.game.number}}</h1>
-  <h3>{{c.player_name}} vs System</h3>
+  <h3>{{c.data.player_name}} vs System</h3>
   
   <div class = "field" 
        ng-class="{ 'open': {{field.player == '0'}}, 'cross': {{field.player == '2'}}, 'circle': {{field.player == '1'}}}" 
@@ -192,6 +222,9 @@ h3 {
     	 ng-click="c.clickOnField(this.field)" >
   </div>
   
+ 
+  <button id="save"  ng-hide="!c.move_set" ng-click="c.saveMove()" type="button" class="btn btn-danger">SAVE MOVE</button>
+  <button id="save"  ng-hide="!c.move_locked" disabled="disabled" type="button" class="btn btn-secondary">WAITING FOR SYSTEM MOVE</button>
 </div>]]></template>
     </sp_widget>
 </record_update>

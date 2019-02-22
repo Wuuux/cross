@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Cross game" max_length="40" name="x_145082_cross_game" type="collection">
-        <element label="Current player" max_length="40" name="current_player" type="integer"/>
+        <element default="1" label="Current player" max_length="40" name="current_player" type="integer"/>
         <element label="Game" max_length="2000" name="game" type="string"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
         <element label="Player" max_length="32" name="player" reference="sys_user" type="reference"/>
